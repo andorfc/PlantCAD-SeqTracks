@@ -28,7 +28,7 @@ This provides a powerful way to interpret the outputs of large DNA language mode
 ---
 
 ## 📁 Directory Structure
-'''
+```text
 PlantCAD-SeqTracks/
 ├── data/                   # Input data files
 │   ├── genome.fa           # Reference genome FASTA file
@@ -44,7 +44,7 @@ PlantCAD-SeqTracks/
 │   ├── my_wig.sh           # Script to convert scores to WIG format
 │   └── my_bigwig.sh        # Script to convert WIG to BigWig format
 └── jbrowse_tracks/         # Final BigWig tracks for JBrowse
-'''
+```
 
 ---
 
