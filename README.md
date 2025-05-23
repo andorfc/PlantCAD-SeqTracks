@@ -288,5 +288,5 @@ Please also cite the tools used within the workflow:
 ## 📞 Contact
 
 For questions, bug reports, or feature requests, please create an issue in this GitHub repository.
-Alternatively, you can contact the authors directly (e.g., `your-name <your-email@example.com>` - please update this with actual contact information).
+Alternatively, you can contact the authors directly (e.g., `Carson Andorf <carson.andorf@usda.gov>`).
 
