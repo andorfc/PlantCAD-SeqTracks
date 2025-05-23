@@ -140,8 +140,7 @@ The 'predict_probs_single_job.sh' or 'predict_probs_array.sh' scripts should be 
 
 ```bash
 mkdir -p predictions
-# Ensure the scripts points to your Plant Caduceus installation and input sequences. Use the single job script, to run the analysis
-one TSV at a time. Use the array script to use Slurm or another job scheduler to run multiple jobs at a time. This step may take several hours depending on the type of GPU and the number of sequences per file.
+# Ensure the scripts points to your Plant Caduceus installation and input sequences. Use the single job script, to run the analysis one TSV at a time. Use the array script to use Slurm or another job scheduler to run multiple jobs at a time. This step may take several hours depending on the type of GPU and the number of sequences per file.
 
 bash scripts/predict_probs_single_job.sh.sh
 bash scripts/predict_probs_array.sh.sh
