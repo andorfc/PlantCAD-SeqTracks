@@ -136,11 +136,15 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
 ### Step 3: Predict Nucleotide Probabilities
 
 Run the PlantCaduceus model to predict nucleotide probabilities for the extracted sequences.
-The `zero_shot_score.sh` script should be configured to take the FASTA files (from Step 2) as input and output prediction files (e.g., TSV format) into the `predictions/` directory.
+The 'predict_probs_single_job.sh' or 'predict_probs_array.sh' scripts should be configured to take the TSV files (from Step 2) as input and output prediction files (e.g., TSV format) into the `predictions/` directory.
+
 ```bash
 mkdir -p predictions
-# Ensure zero_shot_score.sh points to your PlantCaduceus installation and input sequences
-bash scripts/zero_shot_score.sh
+# Ensure the scripts points to your Plant Caduceus installation and input sequences. Use the single job script, to run the analysis
+one TSV at a time. Use the array script to use Slurm or another job scheduler to run multiple jobs at a time. This step may take several hours depending on the type of GPU and the number of sequences per file.
+
+bash scripts/predict_probs_single_job.sh.sh
+bash scripts/predict_probs_array.sh.sh
  ```
 
 ### Step 4: Concatenate Predictions
