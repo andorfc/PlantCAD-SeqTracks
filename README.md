@@ -126,9 +126,9 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     Make it executable: `chmod +x scripts/my_bed.sh`
     Run the script (example using `sbatch` if on a cluster, or `bash` locally):
     ```bash
-    # sbatch scripts/my_bed.sh
+    # sbatch scripts/bed.sh
     # OR
-    bash scripts/my_bed.sh
+    bash scripts/bed.sh
     ```
     *Note: The `sbatch` command implies a SLURM scheduler. Adjust accordingly if you are using a different job scheduler or running locally.*
 
@@ -169,7 +169,7 @@ Adjust predictions_*.tsv pattern based on your output from zero_shot_score.sh.
 Use my_info.sh to calculate Information Content (IC) and other derived scores from predictions/all_predictions.tsv. The output might be one or more files ready for WIG conversion.
 
 ```bash
-scripts/my_info.sh
+scripts/info.sh
 ```
 This script will need to implement the formulas below and produce output files (e.g., in a format easily convertible to WIG) that contain per-base scores for each track type described in "Example Output Tracks".
 
