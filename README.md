@@ -74,7 +74,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
 
 1.  **Clone the repository (Example):**
     ```bash
-    git clone [https://github.com/your-username/PlantCAD-SeqTracks.git](https://github.com/your-username/PlantCAD-SeqTracks.git)
+    git clone https://github.com/your-username/PlantCAD-SeqTracks.git
     cd PlantCAD-SeqTracks
     ```
 
@@ -96,9 +96,9 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     For the example:
     ```bash
     mkdir -p data
-    wget [https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.gff3.gz](https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.gff3.gz) -O data/annotation.gff3.gz
+    wget https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.gff3.gz -O data/annotation.gff3.gz
     gunzip data/annotation.gff3.gz
-    wget [https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.fa.gz](https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.fa.gz) -O data/genome.fa.gz
+    wget https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.fa.gz -O data/genome.fa.gz
     gunzip data/genome.fa.gz
     ```
     Ensure your `genome.fa` file is indexed by SAMtools (`samtools faidx data/genome.fa`) if your BEDTools version requires it for sequence extraction.
