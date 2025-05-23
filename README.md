@@ -79,30 +79,14 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     ```
 
 2.  **Create and activate the Conda environment:**
-    The `scripts/environment.yml` file should define the necessary dependencies. If it's not already created, you can create it with the following content:
-    ```yaml
-    # scripts/environment.yml
-    name: dnalogo
-    channels:
-      - bioconda
-      - conda-forge
-      - defaults
-    dependencies:
-      - python=3.10
-      - pandas
-      - bedtools
-      # Add any other specific dependencies for PlantCaduceus or your scripts
-    ```
-    Then, create the environment:
+    The `environment.yml` file defines the necessary dependencies. 
+
+    create the environment:
     ```bash
     conda env create -f scripts/environment.yml
-    conda activate dnalogo
+    conda activate pytorch_pc
     ```
-    Alternatively, if `environment.yml` is not provided, you can create the environment with essential tools:
-    ```bash
-    conda create -n dnalogo python=3.10 pandas bedtools -c bioconda -c conda-forge -y
-    conda activate dnalogo
-    ```
+    
 3.  **Ensure PlantCaduceus is installed and accessible.** Follow the installation instructions from the [PlantCaduceus GitHub repository](https://github.com/somervillLab/PlantCaduceus). The `zero_shot_score.sh` script will need to be able to call the PlantCaduceus prediction tools.
 
 ### Step 1: Data Download & Preparation
