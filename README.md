@@ -35,11 +35,16 @@ PlantCAD-SeqTracks/
 ├── data/                   # Input data files
 │   ├── genome.fa           # Reference genome FASTA file
 │   └── annotation.gff3     # Gene annotation GFF3 file
+|
+├── environment.yml         # Conda environment definition
+|
+├── my_bed.sh               # Script to generate BED files from GFF (Assumed)
+|
 ├── bed/                    # Generated BED files defining regions of interest
 ├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
 ├── scripts/                # All executable scripts and environment file
-│   ├── environment.yml     # Conda environment definition
-│   ├── my_bed.sh           # Script to generate BED files from GFF (Assumed)
+│   ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
+|   | 
 │   ├── extract_sequences.sh # Script to extract FASTA sequences using BEDTools
 │   ├── zero_shot_score.sh  # Script to run PlantCaduceus predictions
 │   ├── my_info.sh          # Script to calculate Information Content
