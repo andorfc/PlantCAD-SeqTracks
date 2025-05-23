@@ -40,12 +40,13 @@ PlantCAD-SeqTracks/
 |
 ├── my_bed.sh               # Script to generate BED files from GFF (Assumed)
 |
+├── extract_sequences.sh    # Script to extract FASTA sequences using BEDTools
+|
 ├── bed/                    # Generated BED files defining regions of interest
 ├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
 ├── scripts/                # All executable scripts and environment file
 │   ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
 |   | 
-│   ├── extract_sequences.sh # Script to extract FASTA sequences using BEDTools
 │   ├── zero_shot_score.sh  # Script to run PlantCaduceus predictions
 │   ├── my_info.sh          # Script to calculate Information Content
 │   ├── my_wig.sh           # Script to convert scores to WIG format
@@ -112,18 +113,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
 
 1.  **Generate BED files from your GFF3 annotation:**
     The `my_bed.sh` script is responsible for creating BED files that define the regions of interest (e.g., 1kb upstream and downstream of genes) from `data/annotation.gff3`. You will need to create or adapt this script for your specific needs.
-    Example placeholder for `scripts/my_bed.sh` (you'll need to customize this):
-    ```bash
-    #!/bin/bash
-    # This is a placeholder script.
-    # You need to implement the logic to generate BED files from data/annotation.gff3
-    # For example, to get regions 1kb upstream and downstream of genes:
-    # awk -F'\t' '$3 == "gene" {print $1, $4-1000, $5+1000, $9, ".", $7}' data/annotation.gff3 | sed 's/ID=[^;]*;//' > bed/gene_regions.bed
-    echo "Generating BED files... (Customize my_bed.sh)"
-    # Ensure the bed/ directory exists
-    mkdir -p bed
-    # Your BED generation commands here, e.g., outputting to bed/my_regions.bed
-    ```
+    
     Make it executable: `chmod +x scripts/my_bed.sh`
     Run the script (example using `sbatch` if on a cluster, or `bash` locally):
     ```bash
@@ -136,25 +126,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
 2.  **Extract genomic sequences using BEDTools:**
     This script uses the BED files generated in the previous step and the reference genome to extract FASTA sequences.
     Ensure `scripts/extract_sequences.sh` is configured to use your generated BED files and `data/genome.fa`.
-    Example content for `scripts/extract_sequences.sh` (customize as needed):
-    ```bash
-    #!/bin/bash
-    GENOME_FA="data/genome.fa"
-    BED_DIR="bed"
-    OUTPUT_DIR="sequences" # Or directly to a file used by zero_shot_score.sh
 
-    mkdir -p ${OUTPUT_DIR}
-
-    # Example: process each bed file in the bed directory
-    for bed_file in ${BED_DIR}/*.bed; do
-        filename=$(basename -- "$bed_file")
-        output_fasta="${OUTPUT_DIR}/${filename%.bed}.fasta"
-        echo "Extracting sequences for ${bed_file} to ${output_fasta}"
-        bedtools getfasta -fi "${GENOME_FA}" -bed "${bed_file}" -fo "${output_fasta}"
-    done
-
-    echo "Sequence extraction complete."
-    ```
     Make it executable: `chmod +x scripts/extract_sequences.sh`
     Run the script:
     ```bash
