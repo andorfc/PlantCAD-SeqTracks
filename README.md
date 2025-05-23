@@ -83,7 +83,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
 
     create the environment:
     ```bash
-    conda env create -f scripts/environment.yml
+    conda env create -f environment.yml
     conda activate pytorch_pc
     ```
     
