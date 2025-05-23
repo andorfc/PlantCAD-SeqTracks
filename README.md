@@ -124,7 +124,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     *Note: The `sbatch` command implies a SLURM scheduler. Adjust accordingly if you are using a different job scheduler or running locally.*
 
 2.  **Extract genomic sequences using BEDTools:**
-    This script uses the BED files generated in the previous step and the reference genome to extract FASTA sequences.
+    This script uses the BED files generated in the previous step and the reference genome to extract FASTA sequences using bedtools (installation required).
     Ensure `scripts/extract_sequences.sh` is configured to use your generated BED files and `data/genome.fa`.
 
     Make it executable: `chmod +x scripts/extract_sequences.sh`
