@@ -38,16 +38,25 @@ PlantCAD-SeqTracks/
 |
 ├── environment.yml         # Conda environment definition
 |
-├── my_bed.sh               # Script to generate BED files from GFF (Assumed)
+├── bed.sh               # Script to generate BED files from GFF (Assumed)
 |
 ├── extract_sequences.sh    # Script to extract FASTA sequences using BEDTools
+|
+├── predict_probs_array.sh       #Script to run PlantCaduceus predictions with a job array
+├── predict_probs_single_job.sh  #Script to run PlantCaduceus predictions one job at a time
+|
+├── info.sh          # Script to calculate Information Content
+|
+├── wig.sh           # Script to convert scores to WIG format
+|
+├── bigwig.sh        # Script to convert WIG to BigWig format
 |
 ├── bed/                    # Generated BED files defining regions of interest
 ├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
 ├── scripts/                # All executable scripts and environment file
 │   ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
 |   | 
-│   ├── zero_shot_score.sh  # Script to run PlantCaduceus predictions
+│   ├── zero_shot_probabilities.py      # Python code to run PlantCaduceus predictions
 │   ├── my_info.sh          # Script to calculate Information Content
 │   ├── my_wig.sh           # Script to convert scores to WIG format
 │   └── my_bigwig.sh        # Script to convert WIG to BigWig format
