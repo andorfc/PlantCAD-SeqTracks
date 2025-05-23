@@ -1,3 +1,5 @@
+# UNDER CONSTRUCTION
+
 # PlantCAD-SeqTracks: Visualizing DNA Language Model Predictions in JBrowse 🧬
 
 PlantCAD-SeqTracks is a bioinformatics workflow that leverages the PlantCaduceus DNA-language model to predict nucleotide probabilities around gene models. It then computes the information content (IC) from these probabilities to generate intuitive genomic tracks for visualization in JBrowse. This allows researchers to visually explore regions of functional importance, potential regulatory elements, and variant sites based on the model's understanding of DNA sequences.
