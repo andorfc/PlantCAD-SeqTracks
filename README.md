@@ -53,14 +53,18 @@ PlantCAD-SeqTracks/
 |
 ├── bed/                    # Generated BED files defining regions of interest
 ├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
-├── scripts/                # All executable scripts and environment file
-│   ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
-|   | 
-│   ├── zero_shot_probabilities.py      # Python code to run PlantCaduceus predictions
-│   ├── my_info.sh          # Script to calculate Information Content
-│   ├── my_wig.sh           # Script to convert scores to WIG format
-│   └── my_bigwig.sh        # Script to convert WIG to BigWig format
-└── jbrowse_tracks/         # Final BigWig tracks for JBrowse
+├── info/                   # Probablities and information contenct scores
+├── wig/                    # Wig files
+├── bigwig/                 # Final BigWig tracks for JBrowse
+|
+└── scripts/                # All executable scripts and environment file
+    ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
+    | 
+    ├── zero_shot_probabilities.py      # Python code to run PlantCaduceus predictions
+    ├── my_info.sh          # Script to calculate Information Content
+    ├── my_wig.sh           # Script to convert scores to WIG format
+    └── my_bigwig.sh        # Script to convert WIG to BigWig format
+
 ```
 
 ---
