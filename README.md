@@ -226,7 +226,10 @@ The Information Content at each position is calculated to measure the certainty 
 
 The formula for IC is:
 $$IC = 2 + \sum_{b \in \{A,C,G,T\}} p_b \times \log_2(p_b)$$
-Where $p_b$ is the predicted probability of nucleotide $b$ at that position. If $p_b = 0$, then $p_b \times \log_2(p_b) = 0$.
+
+Where $p_b$ is the predicted probability of nucleotide $b$ at that position. 
+
+If $p_b = 0$, then $p_b \times \log_2(p_b) = 0$.
 
 ### Nucleotide Heights for Visualization (IC-Weighted Probabilities)
 
@@ -241,40 +244,47 @@ $G_{height} = IC \times prob(G)$
 $T_{height} = IC \times prob(T)$
 
 ## 🖼️ Example Output Tracks
+
 The workflow generates several types of tracks for visualization in JBrowse:
 
-PlantCAD_A_IC_weighted.bw: IC-weighted probability for Adenine ($A_{height}$).
-PlantCAD_C_IC_weighted.bw: IC-weighted probability for Cytosine ($C_{height}$).
-PlantCAD_G_IC_weighted.bw: IC-weighted probability for Guanine ($G_{height}$).
-PlantCAD_T_IC_weighted.bw: IC-weighted probability for Thymine ($T_{height}$).
-These four separate tracks highlight positions where specific nucleotides are strongly predicted.
-PlantCAD_IC_summary.bw: A single track showing the highest IC-weighted nucleotide score (max of $A_{height}, C_{height}, G_{height}, T_{height}$) at each genomic position. This gives an overview of the most "important" predicted nucleotide.
-PlantCAD_Information_Content.bw: A track displaying the raw IC score (0 to 2 bits) at each genomic position, indicating the overall certainty or conservation of the prediction.
-PlantCAD_Ref_Allele_IC_weighted.bw: A track showing the IC-weighted predicted probability for the nucleotide that is present in the reference genome at each position. This can highlight how well the model's prediction aligns with the reference.
-PlantCAD_Top_Alt_Allele_IC_weighted.bw: A track showing the IC-weighted predicted probability for the highest-scoring non-reference nucleotide. This can help identify potential variant sites where the model strongly predicts an alternative allele.
-(Actual filenames in jbrowse_tracks/ will depend on your my_bigwig.sh script.)
+* **`PlantCAD_A_IC_weighted.bw`**: IC-weighted probability for Adenine ($A_{height}$).
+* **`PlantCAD_C_IC_weighted.bw`**: IC-weighted probability for Cytosine ($C_{height}$).
+* **`PlantCAD_G_IC_weighted.bw`**: IC-weighted probability for Guanine ($G_{height}$).
+* **`PlantCAD_T_IC_weighted.bw`**: IC-weighted probability for Thymine ($T_{height}$).
+    * *These four separate tracks highlight positions where specific nucleotides are strongly predicted.*
+* **`PlantCAD_IC_summary.bw`**: A single track showing the highest IC-weighted nucleotide score (max of $A_{height}, C_{height}, G_{height}, T_{height}$) at each genomic position. This gives an overview of the most "important" predicted nucleotide.
+* **`PlantCAD_Information_Content.bw`**: A track displaying the raw IC score (0 to 2 bits) at each genomic position, indicating the overall certainty or conservation of the prediction.
+* **`PlantCAD_Ref_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the nucleotide that is present in the reference genome at each position. This can highlight how well the model's prediction aligns with the reference.
+* **`PlantCAD_Top_Alt_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the *highest-scoring non-reference* nucleotide. This can help identify potential variant sites where the model strongly predicts an alternative allele.
+
+*(Actual filenames in `jbrowse_tracks/` will depend on your `my_bigwig.sh` script.)*
 
 ## 👁️ Visualization
+
 The generated BigWig tracks can be loaded into any JBrowse instance (JBrowse 1, JBrowse 2, or JBrowse Web).
 
-High IC peaks in the PlantCAD_Information_Content.bw track indicate positions that the model predicts with high certainty, often corresponding to conserved and functionally significant positions.
-Nucleotide-specific IC-Weighted tracks (e.g., PlantCAD_A_IC_weighted.bw) can help identify potential regulatory motifs (e.g., a region with consistently high $A_{height}$ and $T_{height}$ scores might indicate an AT-rich motif).
-The PlantCAD_Top_Alt_Allele_IC_weighted.bw track can guide the discovery of interesting SNPs or small indels where the model diverges from the reference genome with high confidence.
+* High IC peaks in the `PlantCAD_Information_Content.bw` track indicate positions that the model predicts with high certainty, often corresponding to conserved and functionally significant positions.
+* Nucleotide-specific IC-Weighted tracks (e.g., `PlantCAD_A_IC_weighted.bw`) can help identify potential regulatory motifs (e.g., a region with consistently high $A_{height}$ and $T_{height}$ scores might indicate an AT-rich motif).
+* The `PlantCAD_Top_Alt_Allele_IC_weighted.bw` track can guide the discovery of interesting SNPs or small indels where the model diverges from the reference genome with high confidence.
+
 By overlaying these tracks with gene annotations, experimental data (e.g., ChIP-seq, RNA-seq), and variant calls, users can gain deeper insights into the genomic landscape as interpreted by the PlantCaduceus model.
 
 ## 📚 Citations
+
 If you use this workflow or the PlantCaduceus model in your research, please cite:
 
-PlantCaduceus Manuscript: https://doi.org/10.1101/2024.06.04.596709
-This GitHub Repository (Example): https://github.com/your-username/PlantCAD-SeqTracks (Update with your actual repository link once created)
+* **PlantCaduceus Manuscript:** [https://doi.org/10.1101/2024.06.04.596709](https://doi.org/10.1101/2024.06.04.596709)
+* **This GitHub Repository (Example):** `https://github.com/your-username/PlantCAD-SeqTracks` (Update with your actual repository link once created)
+
 Please also cite the tools used within the workflow:
 
-BEDTools: Quinlan AR, Hall IM. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 2010 Mar 15;26(6):841-2. (https://bedtools.readthedocs.io)
-JBrowse: Buels R, et al. JBrowse: a dynamic web platform for genome visualization and analysis. Genome Biology. 2016;17:66. (https://jbrowse.org)
-SAMtools (if used for indexing/faidx): Li H, et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics. 2009 Aug 15;25(16):2078-9. (http://www.htslib.org/)
-UCSC Kent Utilities (for wigToBigWig): Kent WJ, et al. BigWig and BigBed: enabling Browse of large distributed datasets. Bioinformatics. 2010 Sep 1;26(17):2204-7. (http://hgdownload.soe.ucsc.edu/admin/exe/)
+* **BEDTools:** Quinlan AR, Hall IM. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 2010 Mar 15;26(6):841-2. ([https://bedtools.readthedocs.io](https://bedtools.readthedocs.io))
+* **JBrowse:** Buels R, et al. JBrowse: a dynamic web platform for genome visualization and analysis. Genome Biology. 2016;17:66. ([https://jbrowse.org](https://jbrowse.org))
+* **SAMtools** (if used for indexing/`faidx`): Li H, et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics. 2009 Aug 15;25(16):2078-9. ([http://www.htslib.org/](http://www.htslib.org/))
+* **UCSC Kent Utilities** (for `wigToBigWig`): Kent WJ, et al. BigWig and BigBed: enabling Browse of large distributed datasets. Bioinformatics. 2010 Sep 1;26(17):2204-7. ([http://hgdownload.soe.ucsc.edu/admin/exe/](http://hgdownload.soe.ucsc.edu/admin/exe/))
 
 ## 📞 Contact
+
 For questions, bug reports, or feature requests, please create an issue in this GitHub repository.
-Alternatively, you can contact the authors directly (e.g., your-name <your-email@example.com> - please update this with actual contact information).
+Alternatively, you can contact the authors directly (e.g., `your-name <your-email@example.com>` - please update this with actual contact information).
 
