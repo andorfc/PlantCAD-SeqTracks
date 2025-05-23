@@ -186,19 +186,19 @@ Combine individual prediction files (if PlantCaduceus outputs multiple files) in
 
 ```bash
 cat predictions/predictions_*.tsv > predictions/all_predictions.tsv
-
+```
 
 Adjust predictions_*.tsv pattern based on your output from zero_shot_score.sh.
 
-Step 5: Calculate Information Content
+### Step 5: Calculate Information Content
 Use my_info.sh to calculate Information Content (IC) and other derived scores from predictions/all_predictions.tsv. The output might be one or more files ready for WIG conversion.
 
 ```bash
-bash scripts/my_info.sh
+scripts/my_info.sh
 ```
 This script will need to implement the formulas below and produce output files (e.g., in a format easily convertible to WIG) that contain per-base scores for each track type described in "Example Output Tracks".
 
-Step 6: Create JBrowse Tracks
+### Step 6: Create JBrowse Tracks
 Convert the calculated scores into WIG and then BigWig formats for JBrowse.
 Ensure my_wig.sh and my_bigwig.sh are configured to find the output from my_info.sh and have access to tools like wigToBigWig (often available via UCSC Kent utils).
 
@@ -218,20 +218,26 @@ bash scripts/my_bigwig.sh # This script should convert .wig files to .bw (BigWig
 Example my_wig.sh might iterate through output files from my_info.sh, formatting them into WIG. Example my_bigwig.sh would then iterate through these WIG files and use wigToBigWig.
 ```
 
-##  🧪 Formulas Used
-Information Content (IC)
+## 🧪 Formulas Used
+
+### Information Content (IC)
+
 The Information Content at each position is calculated to measure the certainty of the prediction. It ranges from 0 (all nucleotides equally probable) to 2 bits (one nucleotide is predicted with 100% probability).
 
 The formula for IC is:
-$$IC = 2 + \sum_{b \in {A,C,G,T}} p_b \times \log_2(p_b)$$
+$$IC = 2 + \sum_{b \in \{A,C,G,T\}} p_b \times \log_2(p_b)$$
 Where $p_b$ is the predicted probability of nucleotide $b$ at that position. If $p_b = 0$, then $p_b \times \log_2(p_b) = 0$.
 
-Nucleotide Heights for Visualization (IC-Weighted Probabilities)
+### Nucleotide Heights for Visualization (IC-Weighted Probabilities)
+
 For visualization (e.g., in sequence logos or height-scaled tracks), the height of each nucleotide can be represented as its probability weighted by the IC at that position:
 
 $A_{height} = IC \times prob(A)$
+
 $C_{height} = IC \times prob(C)$
+
 $G_{height} = IC \times prob(G)$
+
 $T_{height} = IC \times prob(T)$
 
 ## 🖼️ Example Output Tracks
