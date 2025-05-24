@@ -53,6 +53,7 @@ PlantCAD-SeqTracks/
 |
 ├── bed/                    # Generated BED files defining regions of interest
 ├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
+├── final_predictions/      # Final file with all the predictions from PlantCaduceus
 ├── info/                   # Probablities and information contenct scores
 ├── wig/                    # Wig files
 ├── bigwig/                 # Final BigWig tracks for JBrowse
@@ -164,7 +165,7 @@ bash scripts/predict_probs_array.sh.sh
 Combine individual prediction files (if PlantCaduceus outputs multiple files) into a single file for easier processing.
 
 ```bash
-cat predictions/predictions_*.tsv > predictions/all_predictions.tsv
+bash concat_predsictions.sh
 ```
 
 Adjust predictions_*.tsv pattern based on your output from zero_shot_score.sh.
