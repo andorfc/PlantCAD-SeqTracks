@@ -41,14 +41,11 @@ PlantCAD-SeqTracks/
 ├── bed.sh               # Script to generate BED files from GFF (Assumed)
 |
 ├── extract_sequences.sh    # Script to extract FASTA sequences using BEDTools
-|
 ├── predict_probs_array.sh       #Script to run PlantCaduceus predictions with a job array
 ├── predict_probs_single_job.sh  #Script to run PlantCaduceus predictions one job at a time
-|
+├── concat_predsictions.sh       #Merge all the individual prediction files
 ├── info.sh          # Script to calculate Information Content
-|
 ├── wig.sh           # Script to convert scores to WIG format
-|
 ├── bigwig.sh        # Script to convert WIG to BigWig format
 |
 ├── bed/                    # Generated BED files defining regions of interest
@@ -131,9 +128,9 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     Make it executable: `chmod +x scripts/my_bed.sh`
     Run the script (example using `sbatch` if on a cluster, or `bash` locally):
     ```bash
-    # sbatch scripts/bed.sh
+    # sbatch bed.sh
     # OR
-    bash scripts/bed.sh
+    bash bed.sh
     ```
     *Note: The `sbatch` command implies a SLURM scheduler. Adjust accordingly if you are using a different job scheduler or running locally.*
 
@@ -144,7 +141,7 @@ Follow these steps to run the PlantCAD-SeqTracks workflow:
     Make it executable: `chmod +x scripts/extract_sequences.sh`
     Run the script:
     ```bash
-    bash scripts/extract_sequences.sh
+    bash extract_sequences.sh
     ```
 
 ### Step 3: Predict Nucleotide Probabilities
@@ -156,8 +153,8 @@ The 'predict_probs_single_job.sh' or 'predict_probs_array.sh' scripts should be 
 mkdir -p predictions
 # Ensure the scripts points to your Plant Caduceus installation and input sequences. Use the single job script, to run the analysis one TSV at a time. Use the array script to use Slurm or another job scheduler to run multiple jobs at a time. This step may take several hours depending on the type of GPU and the number of sequences per file.
 
-bash scripts/predict_probs_single_job.sh.sh
-bash scripts/predict_probs_array.sh.sh
+bash predict_probs_single_job.sh
+bash predict_probs_array.sh.sh
  ```
 
 ### Step 4: Concatenate Predictions
@@ -171,12 +168,12 @@ bash concat_predsictions.sh
 Adjust predictions_*.tsv pattern based on your output from zero_shot_score.sh.
 
 ### Step 5: Calculate Information Content
-Use my_info.sh to calculate Information Content (IC) and other derived scores from predictions/all_predictions.tsv. The output might be one or more files ready for WIG conversion.
+Use my_info.sh to calculate Information Content (IC) from final_predictions/predictions.tsv. 
 
 ```bash
-scripts/info.sh
+bash info.sh
 ```
-This script will need to implement the formulas below and produce output files (e.g., in a format easily convertible to WIG) that contain per-base scores for each track type described in "Example Output Tracks".
+This script uses formulas below and produce an output file that can be convertible to WIG. It also contains per-base probability scores.
 
 ### Step 6: Create JBrowse Tracks
 Convert the calculated scores into WIG and then BigWig formats for JBrowse.
