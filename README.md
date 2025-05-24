@@ -32,36 +32,35 @@ This provides a powerful way to interpret the outputs of large DNA language mode
 ## 📁 Directory Structure
 ```text
 PlantCAD-SeqTracks/
-├── data/                   # Input data files
-│   ├── genome.fa           # Reference genome FASTA file
-│   └── annotation.gff3     # Gene annotation GFF3 file
+├── data/                                # Input data files
+│   ├── genome.fa                        # Reference genome FASTA file
+│   └── annotation.gff3                  # Gene annotation GFF3 file
 |
-├── environment.yml         # Conda environment definition
+├── environment.yml                      # Conda environment definition
 |
-├── bed.sh               # Script to generate BED files from GFF (Assumed)
+├── bed.sh                               # Script to generate BED files from GFF (Assumed)
+├── extract_sequences.sh                 # Script to extract FASTA sequences using BEDTools
+├── predict_probs_array.sh               # Script to run PlantCaduceus predictions with a job array
+├── predict_probs_single_job.sh          # Script to run PlantCaduceus predictions one job at a time
+├── concat_predsictions.sh               # Merge all the individual prediction files
+├── info.sh                              # Script to calculate Information Content
+├── wig.sh                               # Script to convert scores to WIG format
+├── bigwig.sh                            # Script to convert WIG to BigWig format
 |
-├── extract_sequences.sh    # Script to extract FASTA sequences using BEDTools
-├── predict_probs_array.sh       #Script to run PlantCaduceus predictions with a job array
-├── predict_probs_single_job.sh  #Script to run PlantCaduceus predictions one job at a time
-├── concat_predsictions.sh       #Merge all the individual prediction files
-├── info.sh          # Script to calculate Information Content
-├── wig.sh           # Script to convert scores to WIG format
-├── bigwig.sh        # Script to convert WIG to BigWig format
+├── bed/                                 # Generated BED files defining regions of interest
+├── data/                                # Stores any extra data files like chrom.sizes
+├── predictions/                         # Raw nucleotide probability predictions from PlantCaduceus
+├── final_predictions/                   # Final file with all the predictions from PlantCaduceus
+├── info/                                # Probablities and information contenct scores
+├── wig/                                 # Wig files
+├── bigwig/                              # Final BigWig tracks for JBrowse
 |
-├── bed/                    # Generated BED files defining regions of interest
-├── predictions/            # Raw nucleotide probability predictions from PlantCaduceus
-├── final_predictions/      # Final file with all the predictions from PlantCaduceus
-├── info/                   # Probablities and information contenct scores
-├── wig/                    # Wig files
-├── bigwig/                 # Final BigWig tracks for JBrowse
-|
-└── scripts/                # All executable scripts and environment file
-    ├── generate_bed_files.py           # Python code to generate BED files from GFF (Assumed)
-    | 
-    ├── zero_shot_probabilities.py      # Python code to run PlantCaduceus predictions
-    ├── my_info.sh          # Script to calculate Information Content
-    ├── my_wig.sh           # Script to convert scores to WIG format
-    └── my_bigwig.sh        # Script to convert WIG to BigWig format
+└── scripts/                             # All executable scripts and environment file
+    ├── generate_bed_files.py            # Generates BED files from GFF
+    ├── zero_shot_probabilities.py       # Runs PlantCaduceus predictions
+    ├── probs_to_ic_fast.py              # Calculates IC from the final prediction file
+    ├── sort_info.py                     # Sorts and orders the IC file based on chromosome and start positions
+    └── ic_scaled_wig.py                 # Converts IC files to WIG format
 
 ```
 
@@ -177,22 +176,25 @@ This script uses formulas below and produce an output file that can be convertib
 
 ### Step 6: Create JBrowse Tracks
 Convert the calculated scores into WIG and then BigWig formats for JBrowse.
-Ensure my_wig.sh and my_bigwig.sh are configured to find the output from my_info.sh and have access to tools like wigToBigWig (often available via UCSC Kent utils).
+Ensure wig.sh and bigwig.sh are configured for your data and you have access the a tool like wigToBigWig (often available via UCSC Kent utils).
 
 Prepare a chrom.sizes file:
 This file contains the names and lengths of the chromosomes in your reference genome. It's required by wigToBigWig. You can create it from your FASTA index:
 
 ```bash
 samtools faidx data/genome.fa
-cut -f1,2 data/genome.fa.fai > data/genome.chrom.sizes
+cut -f1,2 data/genome.fa.fai > data/chrom.sizes
 ```
 
 Run the conversion scripts:
+
+This script should convert outputs from my_info.sh to seven .wig files
 ```bash
-mkdir -p jbrowse_tracks
-bash scripts/my_wig.sh # This script should convert outputs from my_info.sh to .wig files
-bash scripts/my_bigwig.sh # This script should convert .wig files to .bw (BigWig) using genome.chrom.sizes
-Example my_wig.sh might iterate through output files from my_info.sh, formatting them into WIG. Example my_bigwig.sh would then iterate through these WIG files and use wigToBigWig.
+bash wig.sh 
+```
+This script should convert the .wig files to .bw (BigWig) using genome.chrom.sizes
+```bash
+bash bigwig.sh
 ```
 
 ## 🧪 Formulas Used
