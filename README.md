@@ -236,7 +236,7 @@ The workflow generates several types of tracks for visualization in JBrowse:
 * **`PlantCAD_Ref_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the nucleotide that is present in the reference genome at each position. This can highlight how well the model's prediction aligns with the reference.
 * **`PlantCAD_Top_Alt_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the *highest-scoring non-reference* nucleotide. This can help identify potential variant sites where the model strongly predicts an alternative allele.
 
-*(Actual filenames in `jbrowse_tracks/` will depend on your `my_bigwig.sh` script.)*
+*(Actual filenames in `bigwig/` will depend on your `bigwig.sh` script.)*
 
 ## 👁️ Visualization
 
@@ -253,7 +253,7 @@ By overlaying these tracks with gene annotations, experimental data (e.g., ChIP-
 If you use this workflow or the PlantCaduceus model in your research, please cite:
 
 * **PlantCaduceus Manuscript:** [https://doi.org/10.1101/2024.06.04.596709](https://doi.org/10.1101/2024.06.04.596709)
-* **This GitHub Repository (Example):** `https://github.com/your-username/PlantCAD-SeqTracks` (Update with your actual repository link once created)
+* **This GitHub Repository (Example):** `https://github.com/your-username/PlantCAD-SeqTracks` (Manuscript in preperation)
 
 Please also cite the tools used within the workflow:
 
