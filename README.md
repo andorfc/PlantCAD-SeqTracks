@@ -42,10 +42,11 @@ PlantCAD-SeqTracks/
 ├── extract_sequences.sh                 # Script to extract FASTA sequences using BEDTools
 ├── predict_probs_array.sh               # Script to run PlantCaduceus predictions with a job array
 ├── predict_probs_single_job.sh          # Script to run PlantCaduceus predictions one job at a time
-├── concat_predictions.sh               # Merge all the individual prediction files
+├── concat_predictions.sh                # Merge all the individual prediction files
 ├── info.sh                              # Script to calculate Information Content
 ├── wig.sh                               # Script to convert scores to WIG format
 ├── bigwig.sh                            # Script to convert WIG to BigWig format
+├── delta.sh                             # Create a WIG file showing the difference (delta) between the reference and top predicted alternate allele
 |
 ├── bed/                                 # Generated BED files defining regions of interest
 ├── data/                                # Stores any extra data files like chrom.sizes
@@ -60,7 +61,8 @@ PlantCAD-SeqTracks/
     ├── zero_shot_probabilities.py       # Runs PlantCaduceus predictions
     ├── probs_to_ic_fast.py              # Calculates IC from the final prediction file
     ├── sort_info.py                     # Sorts and orders the IC file based on chromosome and start positions
-    └── ic_scaled_wig.py                 # Converts IC files to WIG format
+    ├── ic_scaled_wig.py                 # Converts IC files to WIG format
+    └── calc_delta_icp.py                # Create a WIG file showing the difference (delta) between the reference and top predicted alternate allele
 
 ```
 
@@ -192,6 +194,11 @@ This script should convert outputs from my_info.sh to seven .wig files
 ```bash
 bash wig.sh 
 ```
+Generate the Allelic Information Content Shift track which shows the information-content–weighted probability difference between the most likely alternate allele (non-reference allele) and the reference allele at each base (ΔIC×P), so that positive values highlight where the alternate is favored and negative values are where the reference remains stronger.
+
+```bash
+bash delta.sh
+```
 This script should convert the .wig files to .bw (BigWig) using genome.chrom.sizes
 ```bash
 bash bigwig.sh
@@ -235,6 +242,7 @@ The workflow generates several types of tracks for visualization in JBrowse:
 * **`PlantCAD_Information_Content.bw`**: A track displaying the raw IC score (0 to 2 bits) at each genomic position, indicating the overall certainty or conservation of the prediction.
 * **`PlantCAD_Ref_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the nucleotide that is present in the reference genome at each position. This can highlight how well the model's prediction aligns with the reference.
 * **`PlantCAD_Top_Alt_Allele_IC_weighted.bw`**: A track showing the IC-weighted predicted probability for the *highest-scoring non-reference* nucleotide. This can help identify potential variant sites where the model strongly predicts an alternative allele.
+* **`PlantCAD_Allelic_Information_Content_Shift.bw`**: A track showing the information-content–weighted probability difference between the most likely alternate allele and the reference allele at each base (ΔIC×P), so that positive values highlight where the alternate is favored and negative values where the reference remains are stronger.
 
 *(Actual filenames in `bigwig/` will depend on your `bigwig.sh` script.)*
 
