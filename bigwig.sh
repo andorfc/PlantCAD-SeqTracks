@@ -110,6 +110,13 @@ if true; then
     # ─── Numeric data lines: print only the first time we see this position ─────
     !seen[$1]++                           # $1 is the genomic coordinate
     ' ${INPUT}information.wig > ${INPUT}information_unique.wig
+
+    # ─── Any other non‑numeric header lines (e.g. comments) ─────────────────────
+    $1 !~ /^[0-9]/ { print; next }
+
+    # ─── Numeric data lines: print only the first time we see this position ─────
+    !seen[$1]++                           # $1 is the genomic coordinate
+    ' ${INPUT}delta.wig > ${INPUT}delta_unique.wig
 fi
 
 if true; then
@@ -192,8 +199,20 @@ awk '
   keep                                { print }
 ' ${INPUT}information_unique.wig > ${INPUT}information_chrs.wig
 
+awk '
+  # If this is a variableStep header for a chromosome → turn keep on & print it
+  /^variableStep chrom=chr[0-9XYM]+/ { keep=1; print; next }
+  # If this is a fixedStep  header for a chromosome → turn keep on & print it
+  /^fixedStep    chrom=chr[0-9XYM]+/ { keep=1; print; next }
+  # If this is any other header (i.e. scaffold or something else) → turn keep off
+  /^(variableStep|fixedStep)/        { keep=0; next }
+  # Otherwise, print the line only if keep is on
+  keep                                { print }
+' ${INPUT}delta_unique.wig > ${INPUT}delta_chrs.wig
+
 fi
 
+#Rename as you see fit
 if true; then
     wigToBigWig ${INPUT}A_scaled_chrs.wig chrom.sizes ${OUTPUT}A.bw
     wigToBigWig ${INPUT}G_scaled_chrs.wig chrom.sizes ${OUTPUT}G.bw
@@ -202,4 +221,5 @@ if true; then
     wigToBigWig ${INPUT}nonreference_chrs.wig chrom.sizes ${OUTPUT}nonreference.bw
     wigToBigWig ${INPUT}reference_chrs.wig chrom.sizes ${OUTPUT}reference.bw
     wigToBigWig ${INPUT}information_chrs.wig chrom.sizes ${OUTPUT}information.bw
+    wigToBigWig ${INPUT}delta_chrs.wig chrom.sizes ${OUTPUT}delta.bw
 fi
