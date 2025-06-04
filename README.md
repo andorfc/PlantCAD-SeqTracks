@@ -238,6 +238,54 @@ The workflow generates several types of tracks for visualization in JBrowse:
 
 *(Actual filenames in `bigwig/` will depend on your `bigwig.sh` script.)*
 
+## Complementary Track: MaizeGDB 2024 – Signed Log‑Odds Minor‑Allele Frequency (MAF)
+
+### Summary
+
+This quantitative track shows the signed log₁₀ odds‑ratio of minor‑allele frequency.  This could be used with the PlantCAD trakcs to identify common and reare variants.  
+
+The values are based on the formula:
+
+**Score = log₁₀(MAF / 0.05)**
+
+calculated at every polymorphic site detected in the **MaizeGDB 2024 – High Quality dataset**, which covers approximately **75 million variant sites** from around **1,500 maize lines** (including inbreds, landraces, and teosintes).
+
+**Minor Allele Frequency (MAF)** is the proportion of the less common allele at a genetic locus within a given population.
+
+- **Positive bars (blue)** → common variants (MAF > 0.05)  
+- **Negative bars (red)** → less common and rare variants (MAF < 0.05)  
+- **Zero baseline** → variants near 5% MAF or no variation detected at the locus  
+
+Because the score is symmetric around zero, the track visually distinguishes loci lacking variation from those with:
+- **Very rare alleles** (deep red, strongly negative)
+- **Nearly fixed alternative alleles** (tall blue, strongly positive)
+
+---
+
+### Table to Interpret the Scores
+
+| MAF      | Score = log₁₀(MAF / 0.05) | Bin Description                          |
+|----------|---------------------------|-------------------------------------------|
+| 0.5      | +1.00                     | Very common (50%, ~750 accessions)       |
+| 0.25     | +0.70                     | Common (25%, ~375 accessions)            |
+| 0.10     | +0.30                     | Low-frequency (10%, ~150 accessions)     |
+| 0.05     | 0                         | Pivot / frequency boundary (5%, ~75 accessions) |
+| 0.01     | -0.70                     | Rare (1%, ~15 accessions)                |
+| 0.005    | -1.00                     | Very rare (0.5%, <10 accessions)         |
+| 0.001    | -1.60                     | Ultra-rare (0.1%, 2 accessions)          |
+| 0.0006   | -1.90                     | Homozygous Singletons (0.06%, 1 accession) |
+| 0.0003   | -2.20                     | Heterozygous Singleton (0.006%, 1 accession) |
+
+---
+
+### File Provenance & Citations
+
+- **Reference Assembly**: *Zea mays* B73 RefGen_v5  
+- **Variant Calling & Annotation**: As described in MaizeGDB 2024: [https://doi.org/10.1093/g3journal/jkae281](https://doi.org/10.1093/g3journal/jkae281)
+
+> Please cite the original data releases when using these tracks in publications.
+
+
 ## 👁️ Visualization
 
 The generated BigWig tracks can be loaded into any JBrowse instance (JBrowse 1, JBrowse 2, or JBrowse Web).
