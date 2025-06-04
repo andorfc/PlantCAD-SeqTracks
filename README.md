@@ -28,6 +28,16 @@ This provides a powerful way to interpret the outputs of large DNA language mode
 5.  **Visualize in JBrowse:** Convert the calculated scores into WIG and BigWig formats for easy visualization as tracks in the JBrowse genome browser.
 
 ---
+## Example Genome Browser instance
+![MaizeGDB Figure](./maizegdb_figure.png)
+
+Visualize the predictions of the PlantCaduceus DNA-language model to explore nucleotide probabilities and information content around gene models.  This screenshot shows each of the PlantCAD tracks on the MaizeGDB genome browser at the shrunken1 gene model (Zm00001eb374090). 
+
+<p align="center">
+  <img src="./maizegdb_figure.png" alt="MaizeGDB Genome Browser Example" width="800">
+</p>
+
+---
 
 ## 📁 Directory Structure
 ```text
