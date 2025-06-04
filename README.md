@@ -42,7 +42,7 @@ PlantCAD-SeqTracks/
 ├── extract_sequences.sh                 # Script to extract FASTA sequences using BEDTools
 ├── predict_probs_array.sh               # Script to run PlantCaduceus predictions with a job array
 ├── predict_probs_single_job.sh          # Script to run PlantCaduceus predictions one job at a time
-├── concat_predsictions.sh               # Merge all the individual prediction files
+├── concat_predictions.sh               # Merge all the individual prediction files
 ├── info.sh                              # Script to calculate Information Content
 ├── wig.sh                               # Script to convert scores to WIG format
 ├── bigwig.sh                            # Script to convert WIG to BigWig format
@@ -161,7 +161,7 @@ bash predict_probs_array.sh.sh
 Combine individual prediction files (if PlantCaduceus outputs multiple files) into a single file for easier processing.
 
 ```bash
-bash concat_predsictions.sh
+bash concat_predictions.sh
 ```
 
 Adjust predictions_*.tsv pattern based on your output from zero_shot_score.sh.
