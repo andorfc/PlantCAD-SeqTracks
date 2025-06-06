@@ -36,7 +36,7 @@ This provides a powerful way to interpret the outputs of large DNA language mode
 
 Visualize the predictions of the PlantCaduceus DNA-language model to explore nucleotide probabilities and information content around gene models.  This screenshot shows each of the PlantCAD tracks on the MaizeGDB genome browser at the shrunken1 gene model (Zm00001eb374090). 
 
-[Explore the tracks on the MaizeGDB Genome Browser]: (https://docs.github.com/en/get-started](https://jbrowse.maizegdb.org/?loc=chr9%3A12839146..12845595&tracks=gene_models_official%2CPlantCAD_information%2CPlantCAD_delta%2CPlantCAD_maf%2CPlantCAD_nonreference%2CPlantCAD_reference%2CPlantCAD_ACGT%2CPlantCAD_T%2CPlantCAD_G%2CPlantCAD_C%2CPlantCAD_A&highlight=)
+[Explore the tracks on the MaizeGDB Genome Browser](https://docs.github.com/en/get-started](https://jbrowse.maizegdb.org/?loc=chr9%3A12839146..12845595&tracks=gene_models_official%2CPlantCAD_information%2CPlantCAD_delta%2CPlantCAD_maf%2CPlantCAD_nonreference%2CPlantCAD_reference%2CPlantCAD_ACGT%2CPlantCAD_T%2CPlantCAD_G%2CPlantCAD_C%2CPlantCAD_A&highlight=)
 
 ---
 
