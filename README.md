@@ -331,7 +331,7 @@ Please also cite the tools used within the workflow:
 * **UCSC Kent Utilities** (for `wigToBigWig`): Kent WJ, et al. BigWig and BigBed: enabling Browse of large distributed datasets. Bioinformatics. 2010 Sep 1;26(17):2204-7. ([http://hgdownload.soe.ucsc.edu/admin/exe/](http://hgdownload.soe.ucsc.edu/admin/exe/))
 
 ## Downloads
-The BigBig files used to create the browsers trakc can be found [here](http://hgdownload.soe.ucsc.edu/admin/exe/).
+The BigBig files used to create the browsers trakc can be found [here](https://iastate.box.com/s/6iv294k8thi5yd3r74tjdmd2oewd5ae2).
 
 
 ## 📞 Contact
