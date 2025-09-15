@@ -330,6 +330,10 @@ Please also cite the tools used within the workflow:
 * **SAMtools** (if used for indexing/`faidx`): Li H, et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics. 2009 Aug 15;25(16):2078-9. ([http://www.htslib.org/](http://www.htslib.org/))
 * **UCSC Kent Utilities** (for `wigToBigWig`): Kent WJ, et al. BigWig and BigBed: enabling Browse of large distributed datasets. Bioinformatics. 2010 Sep 1;26(17):2204-7. ([http://hgdownload.soe.ucsc.edu/admin/exe/](http://hgdownload.soe.ucsc.edu/admin/exe/))
 
+## Downloads
+The BigBig files used to create the browsers trakc can be found ([[http://hgdownload.soe.ucsc.edu/admin/exe/](here)].
+
+
 ## 📞 Contact
 
 For questions, bug reports, or feature requests, please create an issue in this GitHub repository.
